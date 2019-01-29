@@ -5,12 +5,11 @@ import { Photo } from './photo.entity';
 
 @Injectable()
 export class PhotoService {
-  constructor(
-    @InjectRepository(Photo)
-    private readonly photoRepository: Repository<Photo>,
-  ) {}
+	constructor (
+		@InjectRepository(Photo) private readonly photoRepository:Repository<Photo>,
+	) {}
 
-  async findAll(): Promise<Photo[]> {
-    return await this.photoRepository.find();
-  }
+	async findAll ():Promise<Photo[]> {
+		return await this.photoRepository.find();
+	}
 }

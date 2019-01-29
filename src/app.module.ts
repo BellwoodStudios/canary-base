@@ -7,8 +7,8 @@ import { PhotoModule } from './photo/photo.module';
 
 @Module({
 	imports: [
-		ConfigModule.forRoot(['src/**/*.configdefs.json']),
-		DatabaseModule.forRootAsync(),
+		ConfigModule.forRoot(['src/**/*.configdefs.js']),
+		DatabaseModule.forRoot(),
 		PhotoModule,
 	],
 	controllers: [AppController],
