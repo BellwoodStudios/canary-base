@@ -19,11 +19,12 @@ export class UserService extends BaseUserService<User> {
 		return new User();
 	}
 
-	async tryLogin (email:string):Promise<User> {
+	async tryLogin (email:string, password:string):Promise<User> {
 		const user = await this.userRepository.findOne({ email });
-		if (user != null) {
+		if (user != null && user.validatePassword(password)) {
 			// Store the token
-			this.authService.signIn(email);
+			const jwt = await this.authService.generateJwt(email);
+			user.token = jwt;
 
 			return user;
 		} else {

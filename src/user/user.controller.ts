@@ -9,8 +9,8 @@ export class UserController {
 	) {}
 
 	@Get('login')
-	async doLogin (@Query('email') email:string):Promise<string> {
-		return (await this.userService.tryLogin(email)).email;
+	async doLogin (@Query('email') email:string, @Query('password') password:string):Promise<any> {
+		return (await this.userService.tryLogin(email, password));
 	}
 
 }
