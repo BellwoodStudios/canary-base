@@ -1,11 +1,8 @@
-import { BaseUser } from '@bellwoodstudios/canary/baseuser/baseuser.entity';
+import { BaseUser } from '@bellwoodstudios/canary/baseuser';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User implements BaseUser {
-
-	@PrimaryGeneratedColumn()
-	id:number;
+export class User extends BaseUser {
 
 	@Column({ length: 250 })
 	email:string;

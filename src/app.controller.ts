@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
-import { AuthService } from '@bellwoodstudios/canary/auth/auth.service';
+import { AuthService } from '@bellwoodstudios/canary/auth';
 
 @Controller()
 export class AppController {

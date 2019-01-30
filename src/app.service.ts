@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@bellwoodstudios/canary/config/config.service';
+import { ConfigService } from '@bellwoodstudios/canary/config';
 
 @Injectable()
 export class AppService {

@@ -1,10 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Model } from '@bellwoodstudios/canary/database';
 
 @Entity()
-export class Photo {
-	@PrimaryGeneratedColumn()
-	id:number;
-
+export class Photo extends Model {
 	@Column({ length: 500 })
 	name:string;
 

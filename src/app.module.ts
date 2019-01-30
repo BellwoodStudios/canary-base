@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@bellwoodstudios/canary/config/config.module';
-import { DatabaseModule } from '@bellwoodstudios/canary/database/database.module';
-import { AuthModule } from '@bellwoodstudios/canary/auth/auth.module';
-import { BaseUserModule } from '@bellwoodstudios/canary/baseuser/baseuser.module';
+import { ConfigModule } from '@bellwoodstudios/canary/config';
+import { DatabaseModule } from '@bellwoodstudios/canary/database';
+import { AuthModule } from '@bellwoodstudios/canary/auth';
 import { PhotoModule } from './photo/photo.module';
-import { BaseUserService } from '@bellwoodstudios/canary/baseuser/baseuser.service';
+import { BaseUserService } from '@bellwoodstudios/canary/baseuser';
 import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
 

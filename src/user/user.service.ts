@@ -1,8 +1,8 @@
 import { Injectable, ForbiddenException } from '@nestjs/common';
 import { User } from './user.entity';
-import { BaseUserService } from '@bellwoodstudios/canary/baseuser/baseuser.service';
+import { BaseUserService } from '@bellwoodstudios/canary/baseuser';
 import { Repository } from 'typeorm';
-import { AuthService } from '@bellwoodstudios/canary/auth/auth.service';
+import { AuthService } from '@bellwoodstudios/canary/auth';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
