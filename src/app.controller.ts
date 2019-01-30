@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthService } from '@bellwoodstudios/canary/auth/auth.service';
 
@@ -13,11 +13,6 @@ export class AppController {
 	@Get()
 	async getHello ():Promise<string> {
 		return await this.appService.getHello();
-	}
-
-	@Get('login')
-	async doLogin () {
-		return this.authService.signIn();
 	}
 
 }
