@@ -1,8 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Model } from '@bellwoodstudios/canary/database';
+import { OwnedEntity } from '@bellwoodstudios/canary/role';
+import { User } from '../user/user.entity';
 
 @Entity()
-export class Photo extends Model {
+export class Photo extends Model implements OwnedEntity<User> {
+
 	@Column({ length: 500 })
 	name:string;
 
@@ -17,4 +20,12 @@ export class Photo extends Model {
 
 	@Column()
 	isPublished:boolean;
+
+	@ManyToOne(type => User, user => user.id)
+	owner:User;
+
+	getOwner ():User {
+		return this.owner;
+	}
+
 }

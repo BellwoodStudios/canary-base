@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Photo } from './photo.entity';
@@ -12,4 +12,9 @@ export class PhotoService {
 	async findAll ():Promise<Photo[]> {
 		return await this.photoRepository.find();
 	}
+
+	async findOne (search):Promise<Photo> {
+		return await this.photoRepository.findOne(search);
+	}
+
 }

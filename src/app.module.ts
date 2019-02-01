@@ -5,16 +5,16 @@ import { ConfigModule } from '@bellwoodstudios/canary/config';
 import { DatabaseModule } from '@bellwoodstudios/canary/database';
 import { AuthModule } from '@bellwoodstudios/canary/auth';
 import { PhotoModule } from './photo/photo.module';
-import { BaseUserService } from '@bellwoodstudios/canary/baseuser';
-import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
+import { RoleModule } from '@bellwoodstudios/canary/role';
 
 @Module({
 	imports: [
 		// Canary core modules
 		ConfigModule.forRootAsync(['src/**/*.configdefs.ts']),
 		DatabaseModule,
-		AuthModule,
+		AuthModule.withUserModule(UserModule),
+		RoleModule,
 
 		// Project-specific modules
 		UserModule,
@@ -25,10 +25,6 @@ import { UserModule } from './user/user.module';
 	],
 	providers: [
 		AppService,
-		{
-			provide: BaseUserService,
-			useClass: UserService,
-		},
 	],
 })
 export class AppModule {}
