@@ -34,8 +34,8 @@ export class User extends BaseUser implements RoleEntity {
 		return this.password === password;
 	}
 
-	getRole ():string {
-		return this.role;
+	hasRole (role:string):boolean {
+		return role === this.role;
 	}
 
 }

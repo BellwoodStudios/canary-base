@@ -1,15 +1,15 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { AuthService } from '@bellwoodstudios/canary/auth';
+import { AlwaysAllow } from '@bellwoodstudios/canary/role';
 
 @Controller()
 export class AppController {
 
 	constructor (
 		private readonly appService:AppService,
-		private readonly authService:AuthService,
 	) {}
 
+	@AlwaysAllow()
 	@Get()
 	async getHello ():Promise<string> {
 		return await this.appService.getHello();

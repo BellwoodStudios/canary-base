@@ -1,10 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Model } from '@bellwoodstudios/canary/database';
-import { OwnedEntity } from '@bellwoodstudios/canary/role';
 import { User } from '../user/user.entity';
 
 @Entity()
-export class Photo extends Model implements OwnedEntity<User> {
+export class Photo extends Model {
 
 	@Column({ length: 500 })
 	name:string;

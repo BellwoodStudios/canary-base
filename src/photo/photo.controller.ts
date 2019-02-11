@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { PhotoService } from './photo.service';
 import { Role } from '@bellwoodstudios/canary/role';
 import { UserRole } from 'src/user/user.entity';
@@ -18,8 +18,8 @@ export class PhotoController {
 
 	@Get('/:id')
 	@Role(UserRole.mod)
-	async getPhoto (id:string):Promise<string> {
-		const photo = await this.photoService.findOne({id});
+	async getPhoto (@Param('id') id:string):Promise<string> {
+		const photo = await this.photoService.findOne({where:{ id }, relations:['owner']});
 		return `${photo.name} owned by ${photo.owner.email}`;
 	}
 

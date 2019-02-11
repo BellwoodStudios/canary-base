@@ -1,13 +1,12 @@
-import { Module, forwardRef } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { UserService } from './user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { UserController } from './user.controller';
 import { APP_USER_SERVICE } from '@bellwoodstudios/canary/baseuser';
-import { AuthModule } from '@bellwoodstudios/canary/auth';
 
 @Module({
-	imports: [forwardRef(() => AuthModule), TypeOrmModule.forFeature([User])],
+	imports: [TypeOrmModule.forFeature([User])],
 	providers: [
 		UserService,
 		{
@@ -16,6 +15,6 @@ import { AuthModule } from '@bellwoodstudios/canary/auth';
 		},
 	],
 	controllers: [UserController],
-	exports: [UserService],
+	exports: [UserService, APP_USER_SERVICE],
 })
 export class UserModule {}

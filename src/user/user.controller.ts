@@ -9,10 +9,4 @@ export class UserController {
 		private readonly userService:UserService,
 	) {}
 
-	@Get('/login')
-	@AllowIfLoggedOut()
-	async doLogin (@Query('email') email:string, @Query('password') password:string):Promise<any> {
-		return (await this.userService.tryLogin(email, password));
-	}
-
 }
