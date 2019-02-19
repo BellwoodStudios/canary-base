@@ -1,6 +1,7 @@
 import { BaseUser } from '@bellwoodstudios/canary/baseuser';
 import { Entity, Column } from 'typeorm';
 import { RoleEntity } from '@bellwoodstudios/canary/role';
+import { Exclude } from 'class-transformer';
 
 export enum UserRole {
 	admin = 'admin',
@@ -14,6 +15,7 @@ export class User extends BaseUser implements RoleEntity {
 	@Column({ length: 250 })
 	email:string;
 
+	@Exclude()
 	@Column({ length: 250 })
 	password:string;
 

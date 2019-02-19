@@ -1,19 +1,18 @@
 /* tslint:disable */
-export abstract class Author {
+export abstract class Photo {
     id: number;
-    firstName?: string;
-    lastName?: string;
-    posts?: Post[];
-}
-
-export abstract class Post {
-    id: number;
-    title?: string;
-    votes?: number;
+    name?: string;
+    description?: string;
+    owner?: User;
 }
 
 export abstract class IQuery {
-    abstract author(id: number): Author | Promise<Author>;
+    abstract photo(id: number): Photo | Promise<Photo>;
 
     abstract temp__(): boolean | Promise<boolean>;
+}
+
+export abstract class User {
+    id: number;
+    email?: string;
 }

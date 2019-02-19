@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, ClassSerializerInterceptor } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@bellwoodstudios/canary/config';
@@ -6,9 +6,11 @@ import { DatabaseModule } from '@bellwoodstudios/canary/database';
 import { AuthModule } from '@bellwoodstudios/canary/auth';
 import { PhotoModule } from './photo/photo.module';
 import { UserModule } from './user/user.module';
-import { RoleModule } from '@bellwoodstudios/canary/role';
+import { RoleGuard } from '@bellwoodstudios/canary/role';
 import { LoginModule } from './login/login.module';
 import { GraphQLModule } from '@bellwoodstudios/canary/graphql';
+import { SerializationModule } from '@bellwoodstudios/canary/serialization';
+import { APP_INTERCEPTOR, APP_GUARD } from '@nestjs/core';
 
 @Module({
 	imports: [
@@ -16,8 +18,7 @@ import { GraphQLModule } from '@bellwoodstudios/canary/graphql';
 		ConfigModule.forRootAsync(['src/**/*.configdefs.ts']),
 		DatabaseModule,
 		AuthModule.withUserModule(UserModule),
-		RoleModule,
-		GraphQLModule.forRootAsync(),
+		GraphQLModule,
 
 		// Project-specific modules
 		UserModule,
@@ -29,6 +30,14 @@ import { GraphQLModule } from '@bellwoodstudios/canary/graphql';
 	],
 	providers: [
 		AppService,
+		{
+			provide: APP_GUARD,
+			useClass: RoleGuard,
+		},
+		{
+			provide: APP_INTERCEPTOR,
+			useClass: ClassSerializerInterceptor,
+		},
 	],
 	exports: [
 	],

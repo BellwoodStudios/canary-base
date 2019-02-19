@@ -1,8 +1,9 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { PhotoService } from './photo.service';
-import { Role } from '@bellwoodstudios/canary/role';
+import { Role, AlwaysAllow } from '@bellwoodstudios/canary/role';
 import { UserRole } from 'src/user/user.entity';
 import { AllowIfLoggedIn } from '@bellwoodstudios/canary/role';
+import { classToPlain } from 'class-transformer';
 
 @Controller('/photos')
 export class PhotoController {
@@ -10,15 +11,15 @@ export class PhotoController {
 	constructor (private readonly photoService:PhotoService) {}
 
 	@Get()
-	@AllowIfLoggedIn()
-	async getPhotos ():Promise<string> {
+	@AlwaysAllow()
+	async getPhotos () {
 		const photos = await this.photoService.findAll();
-		return photos.map(p => p.name).join(', ');
+		return photos;
 	}
 
 	@Get('/:id')
 	@Role(UserRole.mod)
-	async getPhoto (@Param('id') id:string):Promise<string> {
+	async getPhoto (@Param('id') id:string) {
 		const photo = await this.photoService.findOne({where:{ id }, relations:['owner']});
 		return `${photo.name} owned by ${photo.owner.email}`;
 	}
