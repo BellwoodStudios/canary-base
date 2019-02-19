@@ -8,6 +8,7 @@ import { PhotoModule } from './photo/photo.module';
 import { UserModule } from './user/user.module';
 import { RoleModule } from '@bellwoodstudios/canary/role';
 import { LoginModule } from './login/login.module';
+import { GraphQLModule } from '@bellwoodstudios/canary/graphql';
 
 @Module({
 	imports: [
@@ -16,6 +17,7 @@ import { LoginModule } from './login/login.module';
 		DatabaseModule,
 		AuthModule.withUserModule(UserModule),
 		RoleModule,
+		GraphQLModule.forRootAsync(),
 
 		// Project-specific modules
 		UserModule,

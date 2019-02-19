@@ -1,0 +1,15 @@
+type Photo {
+	id: Int!
+	name: String
+	description: String
+	owner: User
+}
+
+type User {
+	id: Int!
+	email: String
+}
+
+type Query {
+	photo(id: Int!): Photo
+}
