@@ -1,4 +1,4 @@
-import { Module, ClassSerializerInterceptor } from '@nestjs/common';
+import { Module, ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@bellwoodstudios/canary/config';
@@ -9,8 +9,7 @@ import { UserModule } from './user/user.module';
 import { RoleGuard } from '@bellwoodstudios/canary/role';
 import { LoginModule } from './login/login.module';
 import { GraphQLModule } from '@bellwoodstudios/canary/graphql';
-import { SerializationModule } from '@bellwoodstudios/canary/serialization';
-import { APP_INTERCEPTOR, APP_GUARD } from '@nestjs/core';
+import { APP_INTERCEPTOR, APP_GUARD, APP_PIPE } from '@nestjs/core';
 
 @Module({
 	imports: [
@@ -37,6 +36,13 @@ import { APP_INTERCEPTOR, APP_GUARD } from '@nestjs/core';
 		{
 			provide: APP_INTERCEPTOR,
 			useClass: ClassSerializerInterceptor,
+		},
+		{
+			provide: APP_PIPE,
+			useValue: new ValidationPipe({
+				whitelist: true,
+				transform: true,
+			}),
 		},
 	],
 	exports: [
