@@ -2,8 +2,7 @@ import { Controller, Get, Param, UseInterceptors, ClassSerializerInterceptor } f
 import { PhotoService } from './photo.service';
 import { Role, AlwaysAllow } from '@bellwoodstudios/canary/role';
 import { UserRole } from 'src/user/user.entity';
-import { AllowIfLoggedIn } from '@bellwoodstudios/canary/role';
-import { classToPlain } from 'class-transformer';
+import { FindOneDto } from '@bellwoodstudios/canary/dto';
 
 @Controller('/photos')
 export class PhotoController {
@@ -19,8 +18,9 @@ export class PhotoController {
 
 	@Get('/:id')
 	@Role(UserRole.mod)
-	async getPhoto (@Param('id') id:string) {
-		const photo = await this.photoService.findOne({where:{ id }, relations:['owner']});
+	@AlwaysAllow()
+	async getPhoto (@Param() dto:FindOneDto) {
+		const photo = await this.photoService.findOne({where:{ id:dto.id }, relations:['owner']});
 		return `${photo.name} owned by ${photo.owner.email}`;
 	}
 

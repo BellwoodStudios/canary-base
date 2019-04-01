@@ -1,5 +1,11 @@
+
+/** ------------------------------------------------------
+ * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+ * -------------------------------------------------------
+ */
+
 /* tslint:disable */
-export abstract class Photo {
+export class Photo {
     id: number;
     name?: string;
     description?: string;
@@ -12,7 +18,7 @@ export abstract class IQuery {
     abstract temp__(): boolean | Promise<boolean>;
 }
 
-export abstract class User {
+export class User {
     id: number;
     email?: string;
 }
