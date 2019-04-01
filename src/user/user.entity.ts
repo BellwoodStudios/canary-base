@@ -2,6 +2,7 @@ import { BaseUser } from '@bellwoodstudios/canary/baseuser';
 import { Entity, Column } from 'typeorm';
 import { RoleEntity } from '@bellwoodstudios/canary/role';
 import { Exclude } from 'class-transformer';
+import { Field, ID, ObjectType } from 'type-graphql';
 
 export enum UserRole {
 	admin = 'admin',
@@ -10,13 +11,16 @@ export enum UserRole {
 }
 
 @Entity()
+@ObjectType()
 export class User extends BaseUser implements RoleEntity {
 
 	@Column({ length: 250 })
+	@Field()
 	email:string;
 
 	@Exclude()
 	@Column({ length: 250 })
+	@Field()
 	password:string;
 
 	@Column({
@@ -24,8 +28,10 @@ export class User extends BaseUser implements RoleEntity {
 		enum: UserRole,
 		default: UserRole.user,
 	})
+	@Field()
 	role:UserRole;
 
+	@Field()
 	token:string;
 
 	getIdentifier ():string {

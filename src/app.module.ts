@@ -17,7 +17,7 @@ import { APP_INTERCEPTOR, APP_GUARD, APP_PIPE } from '@nestjs/core';
 		ConfigModule.forRootAsync(['src/**/*.configdefs.ts']),
 		DatabaseModule,
 		AuthModule.withUserModule(UserModule),
-		GraphQLModule,
+		GraphQLModule.forRootAsync(),
 
 		// Project-specific modules
 		UserModule,

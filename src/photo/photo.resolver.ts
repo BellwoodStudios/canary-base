@@ -1,19 +1,20 @@
 import { Args, Mutation, Query, Resolver, Subscription, ResolveProperty, Parent } from '@nestjs/graphql';
 import { PhotoService } from './photo.service';
+import { Photo } from '../photo/photo.entity';
+import { NotFoundException } from '@nestjs/common';
 
-@Resolver('Photo')
-export class AuthorResolver {
+@Resolver(of => Photo)
+export class PhotoResolver {
 
 	constructor (private readonly photoService:PhotoService) {}
 
-	@Query()
-	async author (@Args('id') id:number) {
-		return await this.authorsService.findOneById(id);
+	@Query(returns => Photo)
+	async photo (@Args('id') id:string):Promise<Photo> {
+		const photo = await this.photoService.findOne(id);
+		if (!photo) {
+			throw new NotFoundException(id);
+		}
+		return photo;
 	}
 
-	@ResolveProperty()
-	async posts (@Parent() author) {
-		const { id } = author;
-		return await this.postsService.findAll({ authorId: id });
-	}
 }
