@@ -3,7 +3,31 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+type Model {
+  id: ID!
+  created: DateTime!
+  updated: DateTime!
+}
+
+type Mutation {
+  addPhoto(newPhotoData: NewPhotoInput!): Photo!
+}
+
+input NewPhotoInput {
+  name: String!
+  description: String
+  isPublished: Boolean!
+}
+
 type Photo {
+  id: ID!
+  created: DateTime!
+  updated: DateTime!
   name: String!
   description: String!
   filename: String!
@@ -12,7 +36,11 @@ type Photo {
 }
 
 type Query {
-  photo(id: String!): Photo!
+  photo(id: Int!): Photo!
+}
+
+type Subscription {
+  photoAdded: Photo!
 }
 
 type User {
